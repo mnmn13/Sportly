@@ -1,0 +1,387 @@
+{
+  "api": {
+    "results": 10,
+    "fixtures": [
+      {
+        "fixture_id": 136126,
+        "league_id": 39,
+        "league": {
+          "name": "Jupiler Pro League",
+          "country": "Belgium",
+          "logo": "https://media-2.api-sports.io/football/leagues/144.png",
+          "flag": "https://media-2.api-sports.io/flags/be.svg"
+        },
+        "event_date": "2018-05-20T16:00:00+00:00",
+        "event_timestamp": 1526832000,
+        "firstHalfStart": 1526832000,
+        "secondHalfStart": 1526835600,
+        "round": "Play-offs I - 10",
+        "status": "Match Finished",
+        "statusShort": "FT",
+        "elapsed": 90,
+        "venue": "Jan Breydelstadion (Brugge)",
+        "referee": null,
+        "homeTeam": {
+          "team_id": 569,
+          "team_name": "Club Brugge KV",
+          "logo": "https://media-3.api-sports.io/football/teams/569.png"
+        },
+        "awayTeam": {
+          "team_id": 631,
+          "team_name": "Gent",
+          "logo": "https://media-2.api-sports.io/football/teams/631.png"
+        },
+        "goalsHomeTeam": 0,
+        "goalsAwayTeam": 1,
+        "score": {
+          "halftime": "0-1",
+          "fulltime": "0-1",
+          "extratime": null,
+          "penalty": null
+        }
+      },
+      {
+        "fixture_id": 136127,
+        "league_id": 39,
+        "league": {
+          "name": "Jupiler Pro League",
+          "country": "Belgium",
+          "logo": "https://media-1.api-sports.io/football/leagues/144.png",
+          "flag": "https://media-1.api-sports.io/flags/be.svg"
+        },
+        "event_date": "2018-05-20T16:00:00+00:00",
+        "event_timestamp": 1526832000,
+        "firstHalfStart": 1526832000,
+        "secondHalfStart": 1526835600,
+        "round": "Play-offs I - 10",
+        "status": "Match Finished",
+        "statusShort": "FT",
+        "elapsed": 90,
+        "venue": "Stade du Pays de Charleroi (Charleroi)",
+        "referee": null,
+        "homeTeam": {
+          "team_id": 736,
+          "team_name": "Charleroi",
+          "logo": "https://media-3.api-sports.io/football/teams/736.png"
+        },
+        "awayTeam": {
+          "team_id": 733,
+          "team_name": "Standard Liege",
+          "logo": "https://media-3.api-sports.io/football/teams/733.png"
+        },
+        "goalsHomeTeam": 0,
+        "goalsAwayTeam": 0,
+        "score": {
+          "halftime": "0-0",
+          "fulltime": "0-0",
+          "extratime": null,
+          "penalty": null
+        }
+      },
+      {
+        "fixture_id": 136128,
+        "league_id": 39,
+        "league": {
+          "name": "Jupiler Pro League",
+          "country": "Belgium",
+          "logo": "https://media-2.api-sports.io/football/leagues/144.png",
+          "flag": "https://media-1.api-sports.io/flags/be.svg"
+        },
+        "event_date": "2018-05-20T16:00:00+00:00",
+        "event_timestamp": 1526832000,
+        "firstHalfStart": 1526832000,
+        "secondHalfStart": 1526835600,
+        "round": "Play-offs I - 10",
+        "status": "Match Finished",
+        "statusShort": "FT",
+        "elapsed": 90,
+        "venue": "Stade Constant Vanden Stock (Bruxelles (Brussel))",
+        "referee": null,
+        "homeTeam": {
+          "team_id": 554,
+          "team_name": "Anderlecht",
+          "logo": "https://media-1.api-sports.io/football/teams/554.png"
+        },
+        "awayTeam": {
+          "team_id": 742,
+          "team_name": "Genk",
+          "logo": "https://media-1.api-sports.io/football/teams/742.png"
+        },
+        "goalsHomeTeam": 1,
+        "goalsAwayTeam": 2,
+        "score": {
+          "halftime": "0-2",
+          "fulltime": "1-2",
+          "extratime": null,
+          "penalty": null
+        }
+      },
+      {
+        "fixture_id": 136123,
+        "league_id": 39,
+        "league": {
+          "name": "Jupiler Pro League",
+          "country": "Belgium",
+          "logo": "https://media-2.api-sports.io/football/leagues/144.png",
+          "flag": "https://media-1.api-sports.io/flags/be.svg"
+        },
+        "event_date": "2018-05-13T16:00:00+00:00",
+        "event_timestamp": 1526227200,
+        "firstHalfStart": 1526227200,
+        "secondHalfStart": 1526230800,
+        "round": "Play-offs I - 9",
+        "status": "Match Finished",
+        "statusShort": "FT",
+        "elapsed": 90,
+        "venue": "GHELAMCO-arena (Gent)",
+        "referee": null,
+        "homeTeam": {
+          "team_id": 631,
+          "team_name": "Gent",
+          "logo": "https://media-3.api-sports.io/football/teams/631.png"
+        },
+        "awayTeam": {
+          "team_id": 554,
+          "team_name": "Anderlecht",
+          "logo": "https://media-3.api-sports.io/football/teams/554.png"
+        },
+        "goalsHomeTeam": 1,
+        "goalsAwayTeam": 0,
+        "score": {
+          "halftime": "0-0",
+          "fulltime": "1-0",
+          "extratime": null,
+          "penalty": null
+        }
+      },
+      {
+        "fixture_id": 136124,
+        "league_id": 39,
+        "league": {
+          "name": "Jupiler Pro League",
+          "country": "Belgium",
+          "logo": "https://media-3.api-sports.io/football/leagues/144.png",
+          "flag": "https://media-3.api-sports.io/flags/be.svg"
+        },
+        "event_date": "2018-05-13T16:00:00+00:00",
+        "event_timestamp": 1526227200,
+        "firstHalfStart": 1526227200,
+        "secondHalfStart": 1526230800,
+        "round": "Play-offs I - 9",
+        "status": "Match Finished",
+        "statusShort": "FT",
+        "elapsed": 90,
+        "venue": "Stade Maurice Dufrasne (Liège (Luik))",
+        "referee": null,
+        "homeTeam": {
+          "team_id": 733,
+          "team_name": "Standard Liege",
+          "logo": "https://media-1.api-sports.io/football/teams/733.png"
+        },
+        "awayTeam": {
+          "team_id": 569,
+          "team_name": "Club Brugge KV",
+          "logo": "https://media-3.api-sports.io/football/teams/569.png"
+        },
+        "goalsHomeTeam": 1,
+        "goalsAwayTeam": 1,
+        "score": {
+          "halftime": "1-1",
+          "fulltime": "1-1",
+          "extratime": null,
+          "penalty": null
+        }
+      },
+      {
+        "fixture_id": 136125,
+        "league_id": 39,
+        "league": {
+          "name": "Jupiler Pro League",
+          "country": "Belgium",
+          "logo": "https://media-2.api-sports.io/football/leagues/144.png",
+          "flag": "https://media-2.api-sports.io/flags/be.svg"
+        },
+        "event_date": "2018-05-13T16:00:00+00:00",
+        "event_timestamp": 1526227200,
+        "firstHalfStart": 1526227200,
+        "secondHalfStart": 1526230800,
+        "round": "Play-offs I - 9",
+        "status": "Match Finished",
+        "statusShort": "FT",
+        "elapsed": 90,
+        "venue": "Luminus Arena (Genk)",
+        "referee": null,
+        "homeTeam": {
+          "team_id": 742,
+          "team_name": "Genk",
+          "logo": "https://media-3.api-sports.io/football/teams/742.png"
+        },
+        "awayTeam": {
+          "team_id": 736,
+          "team_name": "Charleroi",
+          "logo": "https://media-2.api-sports.io/football/teams/736.png"
+        },
+        "goalsHomeTeam": 4,
+        "goalsAwayTeam": 1,
+        "score": {
+          "halftime": "2-1",
+          "fulltime": "4-1",
+          "extratime": null,
+          "penalty": null
+        }
+      },
+      {
+        "fixture_id": 136122,
+        "league_id": 39,
+        "league": {
+          "name": "Jupiler Pro League",
+          "country": "Belgium",
+          "logo": "https://media-3.api-sports.io/football/leagues/144.png",
+          "flag": "https://media-3.api-sports.io/flags/be.svg"
+        },
+        "event_date": "2018-05-10T18:30:00+00:00",
+        "event_timestamp": 1525977000,
+        "firstHalfStart": 1525977000,
+        "secondHalfStart": 1525980600,
+        "round": "Play-offs I - 8",
+        "status": "Match Finished",
+        "statusShort": "FT",
+        "elapsed": 90,
+        "venue": "Luminus Arena (Genk)",
+        "referee": null,
+        "homeTeam": {
+          "team_id": 742,
+          "team_name": "Genk",
+          "logo": "https://media-2.api-sports.io/football/teams/742.png"
+        },
+        "awayTeam": {
+          "team_id": 631,
+          "team_name": "Gent",
+          "logo": "https://media-2.api-sports.io/football/teams/631.png"
+        },
+        "goalsHomeTeam": 1,
+        "goalsAwayTeam": 1,
+        "score": {
+          "halftime": "0-1",
+          "fulltime": "1-1",
+          "extratime": null,
+          "penalty": null
+        }
+      },
+      {
+        "fixture_id": 136121,
+        "league_id": 39,
+        "league": {
+          "name": "Jupiler Pro League",
+          "country": "Belgium",
+          "logo": "https://media-3.api-sports.io/football/leagues/144.png",
+          "flag": "https://media-3.api-sports.io/flags/be.svg"
+        },
+        "event_date": "2018-05-10T16:00:00+00:00",
+        "event_timestamp": 1525968000,
+        "firstHalfStart": 1525968000,
+        "secondHalfStart": 1525971600,
+        "round": "Play-offs I - 8",
+        "status": "Match Finished",
+        "statusShort": "FT",
+        "elapsed": 90,
+        "venue": "Stade du Pays de Charleroi (Charleroi)",
+        "referee": null,
+        "homeTeam": {
+          "team_id": 736,
+          "team_name": "Charleroi",
+          "logo": "https://media-1.api-sports.io/football/teams/736.png"
+        },
+        "awayTeam": {
+          "team_id": 569,
+          "team_name": "Club Brugge KV",
+          "logo": "https://media-2.api-sports.io/football/teams/569.png"
+        },
+        "goalsHomeTeam": 1,
+        "goalsAwayTeam": 3,
+        "score": {
+          "halftime": "1-0",
+          "fulltime": "1-3",
+          "extratime": null,
+          "penalty": null
+        }
+      },
+      {
+        "fixture_id": 136120,
+        "league_id": 39,
+        "league": {
+          "name": "Jupiler Pro League",
+          "country": "Belgium",
+          "logo": "https://media-3.api-sports.io/football/leagues/144.png",
+          "flag": "https://media-2.api-sports.io/flags/be.svg"
+        },
+        "event_date": "2018-05-10T12:30:00+00:00",
+        "event_timestamp": 1525955400,
+        "firstHalfStart": 1525955400,
+        "secondHalfStart": 1525959000,
+        "round": "Play-offs I - 8",
+        "status": "Match Finished",
+        "statusShort": "FT",
+        "elapsed": 90,
+        "venue": "Stade Constant Vanden Stock (Bruxelles (Brussel))",
+        "referee": null,
+        "homeTeam": {
+          "team_id": 554,
+          "team_name": "Anderlecht",
+          "logo": "https://media-3.api-sports.io/football/teams/554.png"
+        },
+        "awayTeam": {
+          "team_id": 733,
+          "team_name": "Standard Liege",
+          "logo": "https://media-3.api-sports.io/football/teams/733.png"
+        },
+        "goalsHomeTeam": 1,
+        "goalsAwayTeam": 3,
+        "score": {
+          "halftime": "0-0",
+          "fulltime": "1-3",
+          "extratime": null,
+          "penalty": null
+        }
+      },
+      {
+        "fixture_id": 136119,
+        "league_id": 39,
+        "league": {
+          "name": "Jupiler Pro League",
+          "country": "Belgium",
+          "logo": "https://media-1.api-sports.io/football/leagues/144.png",
+          "flag": "https://media-2.api-sports.io/flags/be.svg"
+        },
+        "event_date": "2018-05-06T16:00:00+00:00",
+        "event_timestamp": 1525622400,
+        "firstHalfStart": 1525622400,
+        "secondHalfStart": 1525626000,
+        "round": "Play-offs I - 7",
+        "status": "Match Finished",
+        "statusShort": "FT",
+        "elapsed": 90,
+        "venue": "Stade Maurice Dufrasne (Liège (Luik))",
+        "referee": null,
+        "homeTeam": {
+          "team_id": 733,
+          "team_name": "Standard Liege",
+          "logo": "https://media-1.api-sports.io/football/teams/733.png"
+        },
+        "awayTeam": {
+          "team_id": 742,
+          "team_name": "Genk",
+          "logo": "https://media-1.api-sports.io/football/teams/742.png"
+        },
+        "goalsHomeTeam": 5,
+        "goalsAwayTeam": 0,
+        "score": {
+          "halftime": "1-0",
+          "fulltime": "5-0",
+          "extratime": null,
+          "penalty": null
+        }
+      }
+    ]
+  }
+}
