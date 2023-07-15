@@ -14,9 +14,9 @@ struct PlayerStatsV3Games: Codable, Hashable {
     var lineups: Int?
     var minutes: Int?
     var number: Int?
-    var position: String
-    var rating: Int?
-    var captain: Bool
+    var position: String?
+    var rating: String?
+    var captain: Bool?
 
     enum CodingKeys: String, CodingKey {
         case appearences = "appearences"

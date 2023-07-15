@@ -16,6 +16,10 @@ class NetworkManager: Request {
 //        testRequest()
     }
     
+    private let testMode: Bool = true
+    
+    private let jsonManager = JSONManager.shared
+    
     //MARK: - NetworkReachabilityManager
     private let manager = NetworkReachabilityManager(host: "www.apple.com")
     var isInternetReachable: SimpleClosure<Bool>?
@@ -40,9 +44,8 @@ class NetworkManager: Request {
         })
     }
     
-    //MARK: - Football
-    
-    //Leagues
+    // MARK: - All leagues
+    @available(*, deprecated, message: "Refactor required")
     func requestLeagues(completion: @escaping SimpleClosure<[LeaguesInfoResponse]>) {
         
         request(endpoint: .getLeagues) { data in
@@ -55,6 +58,8 @@ class NetworkManager: Request {
         }
     }
     
+    // MARK: - Teams by league
+    @available(*, deprecated, message: "Refactor required")
     func requestTeamsByLeague(league: Int, season: Int, completion: @escaping SimpleClosure<[TeamInfoResponse]>) {
         
         request(endpoint: .getTeamsForLeague(league: league, season: season)) { data in
@@ -67,79 +72,74 @@ class NetworkManager: Request {
         }
     }
     
-    func requestLeagueStandings(league: Int, season: Int, completion: @escaping SimpleClosure<[LeaguesInfoResponse]>) {
-        request(endpoint: .stanfingsByseasonAndLeague(season: season, league: league)) { data in
-            do {
-                let model = try JSONDecoder().decode(LeaguesInfoModel.self, from: data)
-                completion(model.response)
-            } catch let error {
-                print(error.localizedDescription)
-            }
+    // MARK: - League standings
+    func requestLeagueStandings(season: Int, league: Int) async throws -> LeaguesInfoResponse {
+        if testMode {
+            return try await jsonManager.loadLeagueStandingsFromJson()
+        } else {
+            let data = try await request(endpoint: .stanfingsByseasonAndLeague(season: season, league: league))
+            guard let model = try JSONDecoder().decode(LeaguesInfoModel.self, from: data).response.first else { throw ErrorGenesis.basicError(.dataError) }
+            return model
         }
     }
-    /// 10 by default
-    func reguestFixturesByLeagueID(id: Int, last: Int = 8, completion: @escaping SimpleClosure<[LeaguesInfoV2Fixture]>) {
-        request(endpoint: .lastFixturesFromleagueID(id: id, last: last)) { data in
-            do {
-                let model = try JSONDecoder().decode(LeaguesInfoV2Model.self, from: data)
-                completion(model.api.fixtures)
-            } catch let error {
-                print(error.localizedDescription)
-            }
-        }
-//        loadModelFromJson(completion: completion)
-    }
     
-    func requestFixtureBySeasonAndLeague(season: String, league: Int, last: Int, completion: @escaping SimpleClosure<[LeaguesFixtureV3Response]>) {
-//        request(endpoint: .fixturesBySeasonAndLeague(season: season, league: league, last: last)) { data in
-//            do {
-//                let model = try JSONDecoder().decode(LeaguesFixtureV3Model.self, from: data)
-//                completion(model.response)
-//            } catch let error {
-//                print(error.localizedDescription)
-//            }
-//        }
-        loadModelFromJson(completion: completion)
-    }
+    // MARK: - Fixtures
     
-    func requestPlayersStats(season: Int, league: Int, completion: @escaping SimpleClosure<[PlayerStatsV3Response]>) {
-        request(endpoint: .playersStatsByLeague(season: 2022, league: 39)) { data in
-            do {
-                let model = try JSONDecoder().decode(PlayerStatsV3Model.self, from: data)
-                completion(model.response)
-            } catch let error {
-                print(error.localizedDescription)
-            }
-        }
-        loadModelFromJson(completion: completion)
-    }
-    
-    func requestPlayersStats(season: Int, league: Int, page: Int) async -> [PlayerStatsV3Response] {
-        let data = await request(endpoint: .playersStatsByLeague(season: 2022, league: 39))
-        do {
-            let model = try JSONDecoder().decode(PlayerStatsV3Model.self, from: data)
+    /// Returns firxture by season and leagueID
+    func requestFixtures(season: String, league: Int, last: Int) async throws -> [LeaguesFixtureV3Response] {
+        if testMode {
+            return try await jsonManager.loadLeagueFixtureFronJson()
+        } else {
+            let data = try await request(endpoint: .fixturesBySeasonAndLeague(season: season, league: league, last: last))
+            let model = try JSONDecoder().decode(LeaguesFixtureV3Model.self, from: data)
             return model.response
-        } catch let error {
-            print(error.localizedDescription)
         }
     }
     
-    func requestPlayerStats(season: Int, league: Int, page: Int) async throws -> [PlayerStatsV3Response] {
+    // MARK: - Player stats block
+    func requestPlayerStats(season: Int, league: Int) async throws -> [PlayerStatsV3Response] {
+        if testMode {
+            return try await jsonManager.loadPlayerStatsFromJson()
+        } else {
+            return try await requestAllPlayersStats(season: season, league: league)
+        }
+    }
+    
+    private func requestAllPlayersStats(season: Int, league: Int) async throws -> [PlayerStatsV3Response] {
+        let firstStats = try await requestPlayerStatsModel(season: season, league: league)
+        let allPages = firstStats.paging.total
+        let delayInSeconds: TimeInterval = 60
         
+        return try await withThrowingTaskGroup(of: [PlayerStatsV3Response].self, body: { group in
+            var returnResponse: [PlayerStatsV3Response] = []
+            
+            for page in 2...allPages {
+                if page % 25 == 0 || page % 25 == 1 || page % 25 == 2 {
+                    Task {
+                        BannerManager.shared.show(.warning, "Data will be loaded in just a minute")
+                        await Task.sleep(UInt64(delayInSeconds * Double(NSEC_PER_SEC)))
+                    }
+                }
+                group.addTask {
+                    return try await self.requestPlayerStatsModel(season: season, league: league, page: page).response
+                }
+            }
+            
+            for try await response in group {
+                returnResponse.append(contentsOf: response)
+            }
+            return returnResponse
+        })
     }
     
-    func requesstTeamsForLeague() async -> [LeaguesInfoV2Fixture] {
-        var fixturesToReturn: [LeaguesInfoV2Fixture] = []
-         await loadModelFromJson { fixtures in
-            fixturesToReturn = fixtures
-        }
-        return fixturesToReturn
+    private func requestPlayerStatsModel(season: Int, league: Int, page: Int = 1) async throws -> PlayerStatsV3Model {
+            let data = try await request(endpoint: .playersStatsByLeague(season: season, league: league, page: page))
+            let model = try JSONDecoder().decode(PlayerStatsV3Model.self, from: data)
+            return model
     }
     
     // MARK: - TestFunc
-    private func testRequest() {
-        
-    }
+    private func testRequest() {}
     
     @available(*, deprecated, message: "Test function, uses exclusively for debug")
     func loadModelFromJson(completion: SimpleClosure<LeaguesInfoResponse>) {
@@ -173,13 +173,13 @@ class NetworkManager: Request {
     }
     
     @available(*, deprecated, message: "Test function, uses exclusively for debug")
-    func loadModelFromJson(completion: SimpleClosure<[PlayerStatsV3Response]>) {
-        if let url = Bundle.main.url(forResource: "playerStatsV3", withExtension: "json") {
+    func loadModelFromJson3(completion: SimpleClosure<PlayerStatsV3Model>) {
+        if let url = Bundle.main.url(forResource: "playerStatsV3allPages", withExtension: "json") {
             do {
                 let data = try Data(contentsOf: url)
                 let decoder = JSONDecoder()
                 let jsonData = try decoder.decode(PlayerStatsV3Model.self, from: data)
-                completion(jsonData.response)
+                completion(jsonData)
             } catch let error {
                 print("error:\(error.localizedDescription)")
             }

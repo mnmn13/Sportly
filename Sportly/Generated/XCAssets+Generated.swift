@@ -41,6 +41,18 @@ internal enum Assets {
   internal static let background = ColorAsset(name: "background")
 }
 internal enum Colors {
+  internal static let bannerBlue = ColorAsset(name: "bannerBlue")
+  internal static let bannerBlueBorder = ColorAsset(name: "bannerBlueBorder")
+  internal static let bannerBlueTranslucent = ColorAsset(name: "bannerBlueTranslucent")
+  internal static let bannerGreen = ColorAsset(name: "bannerGreen")
+  internal static let bannerGreenBorder = ColorAsset(name: "bannerGreenBorder")
+  internal static let bannerGreenTranslucent = ColorAsset(name: "bannerGreenTranslucent")
+  internal static let bannerOrange = ColorAsset(name: "bannerOrange")
+  internal static let bannerOrangeBorder = ColorAsset(name: "bannerOrangeBorder")
+  internal static let bannerOrangeTranslucent = ColorAsset(name: "bannerOrangeTranslucent")
+  internal static let bannerRed = ColorAsset(name: "bannerRed")
+  internal static let bannerRedBorder = ColorAsset(name: "bannerRedBorder")
+  internal static let bannerRedTranslucent = ColorAsset(name: "bannerRedTranslucent")
   internal static let background = ColorAsset(name: "background")
   internal static let gray = ColorAsset(name: "gray")
   internal static let gray2 = ColorAsset(name: "gray2")

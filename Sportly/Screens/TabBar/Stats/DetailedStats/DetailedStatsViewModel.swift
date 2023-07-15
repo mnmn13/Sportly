@@ -13,7 +13,7 @@ protocol DetailedStatsViewModelType {
     var onReload: SimpleClosure<DetailedStatsReload>? { get set }
     var onReload2: SimpleClosure<Changes>? { get set }
     
-    func loadData()
+    func loadData() async
     //TableView
     func getItemsCount() -> Int
     func getItem(indexPath: IndexPath) -> DetailedStatsItem?
@@ -43,23 +43,43 @@ class DetailedStatsViewModel: DetailedStatsViewModelType {
         self.leagueModel = leagueModel
     }
     
-    func loadData() {
-        masterService.requestForLeagueStandings(season: leagueModel.league.season ?? "", league: leagueModel.league.id, last: 8) { [weak self] response in
-            guard let self else { return }
-            self.leagueFixtures = response
-            self.leagueStandings = leagueModel.league.standings!
-            masterService.requestPlayerStats(season: leagueModel.league.season ?? 0, league: leagueModel.league.id) { playersStats in
-                self.playersStats = playersStats
-                updateScreen()
-            }
+//    func loadData() {
+//        masterService.requestForLeagueStandings(season: leagueModel.league.season ?? "", league: leagueModel.league.id, last: 8) { [weak self] response in
+//            guard let self else { return }
+//            self.leagueFixtures = response
+//            self.leagueStandings = leagueModel.league.standings!
+//            self.updateScreen()
+////            masterService.requestPlayerStats(season: leagueModel.league.season ?? "", league: leagueModel.league.id, page: 0) { playersStats in
+////                self.playersStats = playersStats
+////                self.updateScreen()
+////            }
+//        }
+//    }
+    
+    func loadData() async {
+        let season = Int(leagueModel.league.season ?? "0") ?? 0
+        async let fixtures = try? masterService.getLeagueFixtures(season: leagueModel.league.season ?? "0", league: leagueModel.league.id)
+        async let plStats = try? masterService.getPlayerStats(season: season, league: leagueModel.league.id)
+        if let standings = leagueModel.league.standings {
+            leagueStandings = standings
         }
+
+        let result = await (fixtures, plStats)
+        
+        if let fixtures = result.0 {
+            leagueFixtures = fixtures
+        }
+        
+        if let plStats = result.1 {
+            playersStats = plStats
+        }
+        updateScreen()
     }
     
     private func setupInitialItems() {
         startHeaderBlock()
         startLatestResultBlock()
         startTableBlock()
-        
     }
     
     // MARK: - Header block
@@ -131,7 +151,9 @@ class DetailedStatsViewModel: DetailedStatsViewModelType {
     
     // MARK: - Player stats
     private func startPlayerStatsBlock() {
-        
+//        masterService.requestPlayerStats(season: 0, league: 0, page: 0) { response in
+//            
+//        }
     }
     
     // MARK: - Update screen

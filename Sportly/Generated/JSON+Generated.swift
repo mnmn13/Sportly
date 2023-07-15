@@ -1,3 +1,4 @@
+/*
 // swiftlint:disable all
 // Generated using SwiftGen — https://github.com/SwiftGen/SwiftGen
 
@@ -69,3 +70,4 @@ private final class BundleToken {
   }()
 }
 // swiftlint:enable convenience_type
+*/

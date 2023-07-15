@@ -38,8 +38,14 @@ class DetailedStatsViewController: UIViewController {
         bindForReload2()
         setupConstraints()
         view.backgroundColor = .black
-        viewModel.loadData()
+        loadData()
         view.superview?.backgroundColor = .black
+    }
+    
+    private func loadData() {
+        Task {
+            await viewModel.loadData()
+        }
     }
     
     //Bind
@@ -62,14 +68,16 @@ class DetailedStatsViewController: UIViewController {
     private func bindForReload2() {
         viewModel.onReload2 = { [weak self] changes in
             guard let self else { return }
-            if changes != .none {
-                self.tableView.beginUpdates()
+            DispatchQueue.main.async {
+                if changes != .none {
+                    self.tableView.beginUpdates()
                     self.tableView.insertSections(changes.insertedSection, with: .top)
                     self.tableView.deleteSections(changes.removedSection, with: .bottom)
                     self.tableView.insertRows(at: changes.inserted, with: .none)
                     self.tableView.deleteRows(at: changes.removed, with: .none)
                     self.tableView.reloadRows(at: changes.updated, with: .none)
-                self.tableView.endUpdates()
+                    self.tableView.endUpdates()
+                }
             }
         }
     }

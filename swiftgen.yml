@@ -78,9 +78,9 @@ fonts:
       output: Fonts+Generated.swift
 
 ## JSON
-json:
-  inputs:
-    - Resources/JSON/
-  outputs:
-    - templatePath: Templates/json/runtime-swift5.stencil
-      output: JSON+Generated.swift
+#json:
+#  inputs:
+#    - Resources/JSON/
+#  outputs:
+#    - templatePath: Templates/json/runtime-swift5.stencil
+#      output: JSON+Generated.swift

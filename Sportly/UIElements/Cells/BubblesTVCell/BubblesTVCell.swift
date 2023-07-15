@@ -99,20 +99,3 @@ class BubblesTVCell: UITableViewCell, SKSceneDelegate, SKViewDelegate {
         node.run(sequenceAction)
     }
 }
-
-
-
-//extension BubblesTVCell: MagneticDelegate {
-//    func magnetic(_ magnetic: Magnetic, didSelect node: Node) {
-//
-//    }
-//
-//    func magnetic(_ magnetic: Magnetic, didDeselect node: Node) {
-//        print("123")
-//    }
-//
-//    func magnetic(didSelect node: Node) {
-//        print(node)
-//    }
-//}
-

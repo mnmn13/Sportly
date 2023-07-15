@@ -12,7 +12,6 @@ class MasterService: Service {
     //MARK: - Services
     private var userService = UserService()
     private var storageService = StorageService()
-    private var networkService = NetworkService()
     //MARK: - Properties
     private var networkConnection: Bool = false
     
@@ -43,32 +42,16 @@ class MasterService: Service {
     init() {
         bindForNetworkReachability()
         print(url)
-//        requestFixturesByLeagueID(id: 39) { fixtures in
-//            dump(fixtures)
-//        }
     }
     
     private func bindForNetworkReachability() {
         NetworkManager.shared.isInternetReachable = { [weak self] bool in
             guard let self = self else { return }
-            //            if UserDefaults.standard.isLoggedIn {
             self.networkConnection = bool
-            //                self.networkConnection = false
-            //MARK: - Start functions
-
-//            self.requestForleagues(count: 1)
-            
-            //            }
         }
     }
     
-    func requestForleagues() {
-        networkManager.requestLeagues { [weak self] leagues in
-            guard let self = self else { return }
-            self.leagues = leagues
-        }
-    }
-    
+    @available(*, deprecated, message: "Refactor required")
     func requestLeagueStandings(league: Int, season: Int, completion: @escaping SimpleClosure<LeaguesInfoResponse>) {
 //        networkManager.requestLeagueStandings(league: league, season: season) { [weak self] response in
 //            guard let self = self else { return }
@@ -80,16 +63,7 @@ class MasterService: Service {
         }
     }
     
-    func requestForLeagueStandings(season: String, league: Int, last: Int, completion: @escaping SimpleClosure<[LeaguesFixtureV3Response]>) {
-//        networkManager.requestFixtureBySeasonAndLeague(season: season, league: league, last: last) { response in
-//            completion(response)
-//        }
-        networkManager.requestFixtureBySeasonAndLeague(season: season, league: league, last: last) { response in
-            completion(response)
-        }
-    }
-    
-    
+    @available(*, deprecated, message: "Refactor required")
     func requestForTeamsByLeague(league: Int, season: Int) {
         networkManager.requestTeamsByLeague(league: league, season: season) { [weak self] teams in
             guard let self = self else { return }
@@ -97,15 +71,29 @@ class MasterService: Service {
         }
     }
     
-    func requestFixturesByLeagueID(id: Int, last: Int = 8, completion: @escaping SimpleClosure<[LeaguesInfoV2Fixture]>) {
-        networkManager.reguestFixturesByLeagueID(id: id, last: last) { fixtures in
-            completion(fixtures)
+    // MARK: - REFACTORED
+    
+    func getLeagueStandings(season: Int, league: Int) async throws -> [LeaguesInfoResponse] {
+        if networkConnection {
+            return try await networkManager.requestLeagueStandings(season: season, league: league)
+        } else {
+            throw ErrorGenesis.storageError(.notAvailable)
         }
     }
     
-    func requestPlayerStats(season: Int, league: Int, completion: @escaping SimpleClosure<[PlayerStatsV3Response]>) {
-        networkManager.requestPlayersStats(season: <#T##Int#>, league: <#T##Int#>) { statsResponse in
-            completion(statsResponse)
+    func getLeagueFixtures(season: String, league: Int, last: Int = 8) async throws -> [LeaguesFixtureV3Response] {
+        if networkConnection {
+            return try await networkManager.requestFixtures(season: season, league: league, last: last)
+        } else {
+            throw ErrorGenesis.storageError(.notAvailable)
+        }
+    }
+    
+    func getPlayerStats(season: Int, league: Int) async throws -> [PlayerStatsV3Response] {
+        if networkConnection {
+            return try await networkManager.requestPlayerStats(season: season, league: league)
+        } else {
+            throw ErrorGenesis.storageError(.notAvailable)
         }
     }
 }
