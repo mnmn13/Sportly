@@ -13,7 +13,7 @@ class NetworkManager: Request {
     static let shared = NetworkManager()
     private override init() {
         super.init()
-//        testRequest()
+        testRequest()
     }
     
     private let testMode: Bool = true
@@ -45,7 +45,7 @@ class NetworkManager: Request {
     }
     
     // MARK: - All leagues
-    @available(*, deprecated, message: "Refactor required")
+    @available(*, deprecated, message: "Removal required")
     func requestLeagues(completion: @escaping SimpleClosure<[LeaguesInfoResponse]>) {
         
         request(endpoint: .getLeagues) { data in
@@ -58,8 +58,19 @@ class NetworkManager: Request {
         }
     }
     
+    ///Requests all leagues
+    func requestLeagues() async throws -> [LeaguesInfoResponse] {
+        if testMode {
+            throw ErrorGenesis.testingError(.jsonFileNotExist)
+        } else {
+            let data = try await request(endpoint: .getLeagues)
+            let model = try JSONDecoder().decode(LeaguesInfoModel.self, from: data)
+            return model.response
+        }
+    }
+    
     // MARK: - Teams by league
-    @available(*, deprecated, message: "Refactor required")
+    @available(*, deprecated, message: "Removal required")
     func requestTeamsByLeague(league: Int, season: Int, completion: @escaping SimpleClosure<[TeamInfoResponse]>) {
         
         request(endpoint: .getTeamsForLeague(league: league, season: season)) { data in
@@ -72,7 +83,20 @@ class NetworkManager: Request {
         }
     }
     
+    ///Requests teams that are represented in the league
+    func requestTeamsByLeague(league: Int, season: Int) async throws -> [TeamInfoResponse] {
+        
+        if testMode {
+            throw ErrorGenesis.testingError(.jsonFileNotExist)
+        } else {
+            let data = try await request(endpoint: .getTeamsForLeague(league: league, season: season))
+            let model = try JSONDecoder().decode(TeamInfoModel.self, from: data)
+            return model.response
+        }
+    }
+    
     // MARK: - League standings
+    /// Returns league standings
     func requestLeagueStandings(season: Int, league: Int) async throws -> LeaguesInfoResponse {
         if testMode {
             return try await jsonManager.loadLeagueStandingsFromJson()
@@ -80,6 +104,31 @@ class NetworkManager: Request {
             let data = try await request(endpoint: .stanfingsByseasonAndLeague(season: season, league: league))
             guard let model = try JSONDecoder().decode(LeaguesInfoModel.self, from: data).response.first else { throw ErrorGenesis.basicError(.dataError) }
             return model
+        }
+    }
+    
+    ///Returns leagues standings by leagues array
+    func requestLeaguesStandings(leagues: [Int], season: Int) async throws -> [LeaguesInfoResponse] {
+        if testMode {
+            var result: [LeaguesInfoResponse] = []
+            for _ in leagues {
+                let model = try await jsonManager.loadLeagueStandingsFromJson()
+                result.append(model)
+            }
+            return result
+        } else {
+            return try await withThrowingTaskGroup(of: LeaguesInfoResponse.self, body: { group in
+                var result: [LeaguesInfoResponse] = []
+                for league in leagues {
+                    group.addTask {
+                        return try await self.requestLeagueStandings(season: season, league: league)
+                    }
+                }
+                for try await response in group {
+                    result.append(response)
+                }
+                return result
+            })
         }
     }
     
@@ -116,7 +165,9 @@ class NetworkManager: Request {
             for page in 2...allPages {
                 if page % 25 == 0 || page % 25 == 1 || page % 25 == 2 {
                     Task {
-                        BannerManager.shared.show(.warning, "Data will be loaded in just a minute")
+                        DispatchQueue.main.async {
+                            BannerManager.shared.show(.warning, "Data will be loaded in just a minute")
+                        }
                         await Task.sleep(UInt64(delayInSeconds * Double(NSEC_PER_SEC)))
                     }
                 }
@@ -139,7 +190,11 @@ class NetworkManager: Request {
     }
     
     // MARK: - TestFunc
-    private func testRequest() {}
+    private func testRequest() {
+        request(endpoint: .getLeagues) { data in
+            
+        }
+    }
     
     @available(*, deprecated, message: "Test function, uses exclusively for debug")
     func loadModelFromJson(completion: SimpleClosure<LeaguesInfoResponse>) {

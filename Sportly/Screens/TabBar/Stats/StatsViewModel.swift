@@ -11,9 +11,11 @@ import Foundation
 protocol StatsViewModelType {
     
     //Bind
-    var onReload: SimpleClosure<StaticticReload>? { get set }
+    var onReload: SimpleClosure<Changes>? { get set }
     var cellsOnScreen: SimpleClosure<Int>? { get set }
     var skeletonSwitch: SimpleClosure<Bool>? { get set }
+    
+    func loadData() async
     
     //TableView
     
@@ -26,7 +28,7 @@ protocol StatsViewModelType {
 
 class StatsViewModel: StatsViewModelType {
     
-    var onReload: SimpleClosure<StaticticReload>?
+    var onReload: SimpleClosure<Changes>?
     var cellsOnScreen: SimpleClosure<Int>?
     var skeletonSwitch: SimpleClosure<Bool>?
     
@@ -37,59 +39,101 @@ class StatsViewModel: StatsViewModelType {
     private var leaguesCounter: Int = 5
     private var leaguesStandings: [LeaguesInfoResponse] = []
     private var firstReloadFlag: Bool = true
+    private let firstLeaguesToShow: [Int] = [1, 2, 39, 78, 140, 135, 61, 88, 741, 3, 40, 203, 179, 79, 41, 253, 235, 8, 94, 218]//, 119]
+    private var leagueLimit: Int = 5
+    private var onScreen: Set<Int> = []
     
     init(coordinator: StatsCoordinatorType, serviceHolder: ServiceHolder) {
         self.coordinator = coordinator
         self.masterService = serviceHolder.get()
         callBackService = serviceHolder.get()
-        loadData()
     }
     
-    private func loadData() {
-        preSetupItems()
-        guard masterService.leaguesStandings == nil else { return }
-        for i in 1...leaguesCounter {
-            masterService.requestLeagueStandings(league: i, season: 2022) { [weak self] league in
-                guard let self = self else { return }
-                self.leaguesStandings.append(league)
-                self.appendNewItems(league)
-//                self.appendNewItems(league)
-//                self.appendNewItems(league)
-//                self.appendNewItems(league)
-//                self.appendNewItems(league)
-//                self.appendNewItems(league)
-//                self.appendNewItems(league)
-//                self.appendNewItems(league)
+    func loadData() async {
+//        startHeaderBlock()
+        await requestForData()
+        updateScreen()
+    }
+    
+    private func requestForData() async {
+        let newData = Array(firstLeaguesToShow.filter({ !onScreen.contains($0) }).prefix(leagueLimit))
+        if !newData.isEmpty {
+            if let standings = try? await masterService.getLeaguesStandings(season: 2022, leagues: newData) {
+                leaguesStandings.append(contentsOf: standings)
+            }
+        } else {
+            let newLeagues = generateLeaguesID()
+            if let standings = try? await masterService.getLeaguesStandings(season: 2022, leagues: newLeagues) {
+                leaguesStandings.append(contentsOf: standings)
             }
         }
-        onReload?(.allTV)
     }
     
+    func loadMore() async {
+        
+    }
+    
+    private func generateLeaguesID() -> [Int] {
+        var newNumbers: [Int] = []
+        var number = 1
+        while newNumbers.count < leagueLimit {
+            if !onScreen.contains(number) {
+                newNumbers.append(number)
+            }
+            number += 1
+        }
+        return newNumbers
+    }
+    
+    private func setupItems() {
+        startHeaderBlock()
+        startListBlock()
+    }
+    
+    
     // Setup initial items
-    private func preSetupItems() {
+    private func startHeaderBlock() {
         items = [.text(TextTVCellVM(text: "Statistics", cellType: .title)), .spacing(10) ]
     }
     
+    private func startListBlock() {
+        guard !leaguesStandings.isEmpty else { return }
+        appendNewItems(leaguesStandings)
+        
+    }
+    
     // Add new items
-    private func appendNewItems(_ item: LeaguesInfoResponse) {
+    private func appendNewItems(_ items: [LeaguesInfoResponse]) {
+        for item in items {
+            appendNewItem(item)
+            onScreen.insert(item.league.id)
+        }
+    }
+    
+    private func appendNewItem(_ item: LeaguesInfoResponse) {
         if !firstReloadFlag { appendSpacing() } else { firstReloadFlag = false }
         let newItem: StatisticItem = .TVCell(LeagueOverviewTVCellVM(leagueModel: item) { [weak self] league in
             guard let self = self else { return }
             self.openDetailedStatictic(with: league)
         })
         items.append(newItem)
-        guard let index = items.firstIndex(where: { newItem == $0 } ) else { return }
-        let indexPath = IndexPath(item: index, section: 0)
-//        onReload?(.rows(at: [indexPath]))
     }
     
     // Add spacing
     private func appendSpacing() {
         let spacingItem: StatisticItem = .spacing(20)
         items.append(spacingItem)
-        guard let index = items.firstIndex(where: { spacingItem == $0 } ) else { return }
-        let indexPath = IndexPath(item: index, section: 0)
-        onReload?(.rows(at: [indexPath]))
+//        guard let index = items.firstIndex(where: { spacingItem == $0 } ) else { return }
+//        let indexPath = IndexPath(item: index, section: 0)
+//        onReload?(.rows(at: [indexPath]))
+    }
+    
+    // MARK: - Update screen
+    private func updateScreen() {
+        let old = items
+        items.removeAll()
+        setupItems()
+        onReload?(.init(new: items, old: old))
     }
     
     // Loading data with pagination
@@ -106,7 +150,7 @@ class StatsViewModel: StatsViewModelType {
                 for _ in 0...1 {
                     items.append(newItem)
                 }
-                onReload?(.rows(at: [indexPath]))
+//                onReload?(.rows(at: [indexPath]))
             }
         }
     }
@@ -137,7 +181,7 @@ class StatsViewModel: StatsViewModelType {
     }
 }
 
-enum StatisticItem: Equatable {
+enum StatisticItem: Hashable, Equatable {
     case text(TextTVCellVM)
     case spacing(CGFloat)
     case TVCell(LeagueOverviewTVCellVM)
@@ -156,7 +200,7 @@ enum StatisticItem: Equatable {
     }
 }
 
-enum StaticticReload {
-    case allTV
-    case rows(at: [IndexPath])
-}
+//enum StaticticReload {
+//    case allTV
+//    case rows(at: [IndexPath])
+//}

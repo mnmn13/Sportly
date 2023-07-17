@@ -14,9 +14,9 @@ Sportly is an ongoing project aimed at providing football statistics to users. T
 ## Technologies and Architecture
 
 - Language: The app is developed using Swift.
-- User Interface: The user interface is implemented programmatically using UIKit or SwiftUI.
+- User Interface: The user interface is implemented programmatically using UIKit.
 - Networking: Sportly utilizes APIs to fetch football-related data, such as match results, player statistics, and news updates.
-- Data Persistence: The app employs CoreData or Realm for local data storage, allowing users to access information offline.
+- Data Persistence: The app employs Realm for local data storage, allowing users to access information offline.
 - Architecture: Sportly follows the MVVM-C (Model-View-ViewModel-Coordinator) architecture pattern, ensuring separation of concerns and providing a clear structure for development.
 
 ## Installation and Requirements
@@ -27,9 +27,9 @@ As the project is still under development, it is not yet available for installat
 
 Future updates and enhancements for Sportly may include:
 
-- In App notifications for match updates and important events.
+<!--- In App notifications for match updates and important events.-->
 - Advanced Analytics: The app will provide customized analytics based on user-selected preferences, offering insights and trends tailored to individual users.
-- Social features to enable users to connect, share, and discuss football-related content.
+<!--- Social features to enable users to connect, share, and discuss football-related content.-->
 
 ## License
 

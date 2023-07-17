@@ -40,6 +40,7 @@
         case jsonFileError
         case jsonDecodingError
         case jsonFileNotFound
+        case jsonFileNotExist
     }
 
     // MARK: - Error Genesis extension
@@ -88,6 +89,7 @@
             case .jsonFileError: return "Something wrong with JSON file"
             case .jsonDecodingError: return "something wrong with JSON decoding"
             case .jsonFileNotFound: return "JSON file not found"
+            case .jsonFileNotExist: return "JSON file does not exist"
             }
         }
     }

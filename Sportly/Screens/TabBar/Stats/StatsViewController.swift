@@ -19,6 +19,7 @@ class StatsViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = UIColor(projColors: .green1)
         bindForReload()
+        loadData()
         setupNav()
         setupTV()
     }
@@ -33,14 +34,25 @@ class StatsViewController: UIViewController {
         self.hidesBottomBarWhenPushed = false
     }
     
+    private func loadData() {
+        Task {
+            await viewModel.loadData()
+        }
+    }
+    
     private func bindForReload() {
-        viewModel.onReload = { [weak self] reloadType in
-            guard let self = self else { return }
-            switch reloadType {
-            case .allTV:
-                self.tableView.reloadData()
-            case .rows(at: let rows):
-                self.tableView.reloadRows(at: rows, with: .fade)
+        viewModel.onReload = { [weak self] changes in
+            guard let self else { return }
+            DispatchQueue.main.async {
+                if changes != .none {
+                    self.tableView.beginUpdates()
+                    self.tableView.insertSections(changes.insertedSection, with: .top)
+                    self.tableView.deleteSections(changes.removedSection, with: .bottom)
+                    self.tableView.insertRows(at: changes.inserted, with: .none)
+                    self.tableView.deleteRows(at: changes.removed, with: .none)
+                    self.tableView.reloadRows(at: changes.updated, with: .none)
+                    self.tableView.endUpdates()
+                }
             }
         }
     }

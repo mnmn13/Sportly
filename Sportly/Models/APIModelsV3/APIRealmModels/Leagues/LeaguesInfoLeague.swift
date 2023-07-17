@@ -15,7 +15,7 @@ struct LeaguesInfoLeague: Codable, Hashable {
     var type: String? //LeaguesInfoType
     var logo: String
     var flag: String?
-    var season: String?
+    var season: Int?
     var country: String?
     var standings: [[LeaguesInfoStanding]]?
 
@@ -24,6 +24,8 @@ struct LeaguesInfoLeague: Codable, Hashable {
         case name = "name"
         case type = "type"
         case logo = "logo"
+        case flag = "flag"
+        case season = "season"
         case country = "country"
         case standings = "standings"
     }

@@ -57,8 +57,8 @@ class DetailedStatsViewModel: DetailedStatsViewModelType {
 //    }
     
     func loadData() async {
-        let season = Int(leagueModel.league.season ?? "0") ?? 0
-        async let fixtures = try? masterService.getLeagueFixtures(season: leagueModel.league.season ?? "0", league: leagueModel.league.id)
+        let season = leagueModel.league.season ?? 0
+        async let fixtures = try? masterService.getLeagueFixtures(season: "\(season)", league: leagueModel.league.id)
         async let plStats = try? masterService.getPlayerStats(season: season, league: leagueModel.league.id)
         if let standings = leagueModel.league.standings {
             leagueStandings = standings

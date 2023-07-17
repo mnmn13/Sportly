@@ -73,7 +73,8 @@ class MasterService: Service {
     
     // MARK: - REFACTORED
     
-    func getLeagueStandings(season: Int, league: Int) async throws -> [LeaguesInfoResponse] {
+    // MARK: - League standings
+    func getLeagueStandings(season: Int, league: Int) async throws -> LeaguesInfoResponse {
         if networkConnection {
             return try await networkManager.requestLeagueStandings(season: season, league: league)
         } else {
@@ -81,6 +82,15 @@ class MasterService: Service {
         }
     }
     
+    func getLeaguesStandings(season: Int, leagues: [Int]) async throws -> [LeaguesInfoResponse] {
+        if networkConnection {
+            return try await networkManager.requestLeaguesStandings(leagues: leagues, season: season)
+        } else {
+            throw ErrorGenesis.storageError(.notAvailable)
+        }
+    }
+    
+    // MARK: - League fixtures
     func getLeagueFixtures(season: String, league: Int, last: Int = 8) async throws -> [LeaguesFixtureV3Response] {
         if networkConnection {
             return try await networkManager.requestFixtures(season: season, league: league, last: last)
@@ -89,9 +99,28 @@ class MasterService: Service {
         }
     }
     
+    // MARK: - Player stats
     func getPlayerStats(season: Int, league: Int) async throws -> [PlayerStatsV3Response] {
         if networkConnection {
             return try await networkManager.requestPlayerStats(season: season, league: league)
+        } else {
+            throw ErrorGenesis.storageError(.notAvailable)
+        }
+    }
+    
+    // MARK: - Teams
+    func getTeams(league: Int, season: Int) async throws -> [TeamInfoResponse] {
+        if networkConnection {
+            return try await networkManager.requestTeamsByLeague(league: league, season: season)
+        } else {
+            throw ErrorGenesis.storageError(.notAvailable)
+        }
+    }
+    
+    // MARK: - Leagues
+    func getLeagues() async throws -> [LeaguesInfoResponse] {
+        if networkConnection {
+            return try await networkManager.requestLeagues()
         } else {
             throw ErrorGenesis.storageError(.notAvailable)
         }
