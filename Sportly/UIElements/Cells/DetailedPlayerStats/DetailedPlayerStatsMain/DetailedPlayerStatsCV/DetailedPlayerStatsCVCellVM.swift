@@ -9,11 +9,10 @@
 import Foundation
 
 struct DetailedPlayerStatsCVCellVM {
-    
     let image: String
-    let playerNumber: Int
+    let playerNumber: Int = 17
     let playerScore: Int?
-    
+    let playerName: String
 }
 
 extension DetailedPlayerStatsCVCellVM: Hashable {}

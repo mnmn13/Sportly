@@ -30,3 +30,13 @@ enum StatsTypeImage {
     case assists
     case goalsAndAssists
 }
+
+extension DetailedPlayerStatsTitleCellVM: Hashable {
+    static func == (lhs: DetailedPlayerStatsTitleCellVM, rhs: DetailedPlayerStatsTitleCellVM) -> Bool {
+        lhs.statsType == rhs.statsType
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(statsType)
+    }
+}

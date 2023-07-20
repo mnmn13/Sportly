@@ -26,8 +26,8 @@ class DetailedStatsViewController: UIViewController {
         tableView.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         tableView.separatorColor = .black
         tableView.estimatedRowHeight = 300
-        tableView.backgroundView?.backgroundColor = .black
-        tableView.backgroundColor = .black
+        tableView.backgroundColor = .clear
+        tableView.showsVerticalScrollIndicator = false
         registerCells(tableView)
         return tableView
     }()
@@ -39,16 +39,17 @@ class DetailedStatsViewController: UIViewController {
         setupConstraints()
         view.backgroundColor = .black
         loadData()
-        view.superview?.backgroundColor = .black
+        configureNavigationBar()
     }
     
     private func loadData() {
         Task {
             await viewModel.loadData()
+            createGradintLayer()
         }
     }
     
-    //Bind
+    // MARK: - Reload binding
     private func bindForReload() {
         viewModel.onReload = { [weak self] reloadType in
             guard let self = self else { return }
@@ -82,6 +83,34 @@ class DetailedStatsViewController: UIViewController {
         }
     }
     
+    // MARK: - GradientLayer
+    private func createGradintLayer() {
+        let gradientLayer = CAGradientLayer()
+        let black = UIColor.black.cgColor
+        let white = UIColor.white.cgColor
+        gradientLayer.colors = [black, black, black, white, white]
+        gradientLayer.locations = [0.0, 0.2, 0.4, 0.6, 1.0]
+        gradientLayer.frame = view.bounds
+        view.layer.insertSublayer(gradientLayer, at: 0)
+    }
+    
+    // MARK: - Navigation bar
+    private func configureNavigationBar() {
+//        let backButton = UIBarButtonItem(image: UIImage(systemName: "chevron.left"), style: .done, target: self, action: #selector(backButtonTapped))
+        let backButton = UIBarButtonItem(title: "ewq", image: UIImage(systemName: "chevron.left"), target: nil, action: nil)
+        
+        navigationController?.navigationItem.backBarButtonItem = backButton
+//        navigationController?.navigationItem.backButtonTitle = " "
+        navigationController?.navigationBar.isTranslucent = true
+        navigationController?.navigationBar.tintColor = .white
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationController?.navigationBar.shadowImage = UIImage()
+    }
+    
+    @objc private func backButtonTapped() {
+        
+    }
+    
     //Constraints
     private func setupConstraints() {
         view.addSubview(tableView)
@@ -102,6 +131,8 @@ class DetailedStatsViewController: UIViewController {
         tableView.register(DetailedLatestResultsMainCell.self, forCellReuseIdentifier: DetailedLatestResultsMainCell.identifier)
         tableView.register(DetailedTableGroupsCVCell.self, forCellReuseIdentifier: DetailedTableGroupsCVCell.identifier)
         tableView.register(DetailedTableGroupsMainCell.self, forCellReuseIdentifier: DetailedTableGroupsMainCell.identifier)
+        tableView.register(DetailedPlayerStatsTitleCell.self, forCellReuseIdentifier: DetailedPlayerStatsTitleCell.identifier)
+        tableView.register(DetailedPlayerStatsMainCell.self, forCellReuseIdentifier: DetailedPlayerStatsMainCell.identifier)
     }
 }
 
@@ -121,6 +152,8 @@ extension DetailedStatsViewController: UITableViewDelegate {
         case .groups: return 60
         case .table(let cellVM): return viewModel.getSizeForTable(leagueStanding: cellVM.leagueStandings)
         case .spacing(let spacing): return spacing
+        case .playerStatsTitle: return 50
+        case .playerStatsItem: return 200
         }
     }
 }
@@ -158,6 +191,16 @@ extension DetailedStatsViewController: UITableViewDataSource {
             return cell
         case .table(let cellVM):
             guard let cell = tableView.dequeueReusableCell(withIdentifier: DetailedTableGroupsMainCell.identifier, for: indexPath) as? DetailedTableGroupsMainCell else { return tableView.dequeueReusableCell(withIdentifier: "empty", for: indexPath) }
+            cell.configure(cellVM)
+            cell.hideSeparator()
+            return cell
+        case .playerStatsTitle(let cellVM):
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: DetailedPlayerStatsTitleCell.identifier, for: indexPath) as? DetailedPlayerStatsTitleCell else { return tableView.dequeueReusableCell(withIdentifier: "empty", for: indexPath) }
+            cell.configure(cellVM)
+            cell.hideSeparator()
+            return cell
+        case .playerStatsItem(let cellVM):
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: DetailedPlayerStatsMainCell.identifier, for: indexPath) as? DetailedPlayerStatsMainCell else { return tableView.dequeueReusableCell(withIdentifier: "empty", for: indexPath) }
             cell.configure(cellVM)
             cell.hideSeparator()
             return cell

@@ -98,7 +98,11 @@ class DetailedTableGroupsTableContentCell: UITableViewCell {
     }
     
     func hideSeparator() {
-        self.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 800)
+        separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 800)
+    }
+    
+    func showSeparator() {
+        separatorInset = UIEdgeInsets(top: 5, left: 16, bottom: 5, right: 0)
     }
     
     // MARK: - Configure
@@ -121,8 +125,8 @@ class DetailedTableGroupsTableContentCell: UITableViewCell {
         
         lineView.snp.makeConstraints { make in
             make.width.equalTo(3)
-            make.top.equalTo(contentView.snp.top).offset(-4)
-            make.bottom.equalTo(contentView.snp.bottom).offset(-4)
+            make.top.equalTo(contentView.snp.top).offset(2)
+            make.bottom.equalTo(contentView.snp.bottom).offset(-2)
             make.leading.equalTo(contentView.snp.leading)
         }
         
@@ -191,8 +195,8 @@ class DetailedTableGroupsTableContentCell: UITableViewCell {
     
     func getLineViewColor(rank: Int) -> UIColor {
         switch rank {
-        case 1: return .green
-        case 2: return .yellow
+        case 1, 2: return .green
+        case 3: return .yellow
         default: return .gray
         }
     }

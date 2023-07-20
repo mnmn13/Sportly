@@ -14,7 +14,7 @@ class DetailedPlayerStatsTitleCell: UITableViewCell {
     
     private var viewModel: DetailedPlayerStatsTitleCellVM?
     
-    let fontSize: CGFloat = 16
+    let fontSize: CGFloat = 14
     
     private let statsTypePicture: UIImageView = {
         let image = RoundedImageView()
@@ -23,15 +23,16 @@ class DetailedPlayerStatsTitleCell: UITableViewCell {
     
     private lazy var statsTypeLabel: UILabel = {
         let label = UILabel()
-        label.font = FontFamily.Montserrat.Montserrat_SemiBold(size: fontSize)
+        label.font = FontFamily.Montserrat.Montserrat_Bold(size: fontSize)
         label.textColor = .black
         return label
     }()
     
     private lazy var seeAllLabel: UILabel = {
         let label = UILabel()
-        label.font = FontFamily.Montserrat.Montserrat_SemiBold(size: fontSize)
-        label.textColor = .lightGray
+        label.font = FontFamily.Montserrat.Montserrat_Bold(size: fontSize)
+        label.textColor = .gray
+        label.text = "SEE ALL"
         return label
     }()
     
@@ -62,6 +63,10 @@ class DetailedPlayerStatsTitleCell: UITableViewCell {
         viewModel.gestureTapped()
     }
     
+    func hideSeparator() {
+        self.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 800)
+    }
+    
     // MARK: - Configure
     func configure(_ viewModel: DetailedPlayerStatsTitleCellVM) {
         self.viewModel = viewModel
@@ -78,7 +83,7 @@ class DetailedPlayerStatsTitleCell: UITableViewCell {
             make.height.equalTo(statsTypePicture.snp.width)
             make.leading.equalTo(contentView.snp.leading).offset(15)
             make.centerY.equalTo(contentView.snp.centerY)
-            make.size.equalTo(15)
+            make.size.equalTo(20)
         }
         
         statsTypeLabel.snp.makeConstraints { make in

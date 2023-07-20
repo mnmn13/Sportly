@@ -23,7 +23,7 @@ protocol StatsViewModelType {
     func getItem(indexPath: IndexPath) -> StatisticItem?
     
     func validateTappedCell(_ index: IndexPath)
-    func loadNextData(prefetchRowsAt indexPaths: [IndexPath])
+//    func loadNextData(prefetchRowsAt indexPaths: [IndexPath])
 }
 
 class StatsViewModel: StatsViewModelType {
@@ -36,7 +36,7 @@ class StatsViewModel: StatsViewModelType {
     private let masterService: MasterService
     private let callBackService: CallbackService
     private var items: [StatisticItem] = []
-    private var leaguesCounter: Int = 5
+//    private var leaguesCounter: Int = 5
     private var leaguesStandings: [LeaguesInfoResponse] = []
     private var firstReloadFlag: Bool = true
     private let firstLeaguesToShow: [Int] = [1, 2, 39, 78, 140, 135, 61, 88, 741, 3, 40, 203, 179, 79, 41, 253, 235, 8, 94, 218]//, 119]
@@ -50,7 +50,6 @@ class StatsViewModel: StatsViewModelType {
     }
     
     func loadData() async {
-//        startHeaderBlock()
         await requestForData()
         updateScreen()
     }
@@ -91,7 +90,7 @@ class StatsViewModel: StatsViewModelType {
     }
     
     
-    // Setup initial items
+    // Setup block items
     private func startHeaderBlock() {
         items = [.text(TextTVCellVM(text: "Statistics", cellType: .title)), .spacing(10) ]
     }
@@ -99,7 +98,6 @@ class StatsViewModel: StatsViewModelType {
     private func startListBlock() {
         guard !leaguesStandings.isEmpty else { return }
         appendNewItems(leaguesStandings)
-        
     }
     
     // Add new items
@@ -123,9 +121,6 @@ class StatsViewModel: StatsViewModelType {
     private func appendSpacing() {
         let spacingItem: StatisticItem = .spacing(20)
         items.append(spacingItem)
-//        guard let index = items.firstIndex(where: { spacingItem == $0 } ) else { return }
-//        let indexPath = IndexPath(item: index, section: 0)
-//        onReload?(.rows(at: [indexPath]))
     }
     
     // MARK: - Update screen
@@ -137,23 +132,7 @@ class StatsViewModel: StatsViewModelType {
     }
     
     // Loading data with pagination
-    func loadNextData(prefetchRowsAt indexPaths: [IndexPath]) {
-        
-        for indexPath in indexPaths {
-            leaguesCounter += 1
-            masterService.requestLeagueStandings(league: leaguesCounter, season: 2023) { [weak self] response in
-                guard let self = self else { return }
-                
-                let newItem: StatisticItem = .TVCell(LeagueOverviewTVCellVM(leagueModel: response) { league in
-                    self.openDetailedStatictic(with: league)
-                })
-                for _ in 0...1 {
-                    items.append(newItem)
-                }
-//                onReload?(.rows(at: [indexPath]))
-            }
-        }
-    }
+
     
     func validateTappedCell(_ index: IndexPath) {
         let item = items[index.item]

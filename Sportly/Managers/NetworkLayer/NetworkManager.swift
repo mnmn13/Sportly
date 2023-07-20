@@ -158,19 +158,18 @@ class NetworkManager: Request {
         let firstStats = try await requestPlayerStatsModel(season: season, league: league)
         let allPages = firstStats.paging.total
         let delayInSeconds: TimeInterval = 60
+        let delayInNanoSeconds = UInt64(delayInSeconds * 1000000000)
         
         return try await withThrowingTaskGroup(of: [PlayerStatsV3Response].self, body: { group in
             var returnResponse: [PlayerStatsV3Response] = []
             
             for page in 2...allPages {
                 if page % 25 == 0 || page % 25 == 1 || page % 25 == 2 {
-                    Task {
                         DispatchQueue.main.async {
                             BannerManager.shared.show(.warning, "Data will be loaded in just a minute")
                         }
-                        await Task.sleep(UInt64(delayInSeconds * Double(NSEC_PER_SEC)))
+                        try await Task.sleep(nanoseconds: delayInNanoSeconds)
                     }
-                }
                 group.addTask {
                     return try await self.requestPlayerStatsModel(season: season, league: league, page: page).response
                 }

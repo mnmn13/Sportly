@@ -29,7 +29,6 @@ class DetailedStatsViewModel: DetailedStatsViewModelType {
     private let masterService: MasterService
     private let callBackService: CallbackService
     private let leagueModel: LeaguesInfoResponse
-//    private var leagueFixtures: [LeaguesInfoV2Fixture] = []
     private var leagueFixtures: [LeaguesFixtureV3Response] = []
     private var leagueStandings: [[LeaguesInfoStanding]] = []
     private var playersStats: [PlayerStatsV3Response] = []
@@ -42,19 +41,6 @@ class DetailedStatsViewModel: DetailedStatsViewModelType {
         self.callBackService = serviceHolder.get()
         self.leagueModel = leagueModel
     }
-    
-//    func loadData() {
-//        masterService.requestForLeagueStandings(season: leagueModel.league.season ?? "", league: leagueModel.league.id, last: 8) { [weak self] response in
-//            guard let self else { return }
-//            self.leagueFixtures = response
-//            self.leagueStandings = leagueModel.league.standings!
-//            self.updateScreen()
-////            masterService.requestPlayerStats(season: leagueModel.league.season ?? "", league: leagueModel.league.id, page: 0) { playersStats in
-////                self.playersStats = playersStats
-////                self.updateScreen()
-////            }
-//        }
-//    }
     
     func loadData() async {
         let season = leagueModel.league.season ?? 0
@@ -80,6 +66,7 @@ class DetailedStatsViewModel: DetailedStatsViewModelType {
         startHeaderBlock()
         startLatestResultBlock()
         startTableBlock()
+        startPlayerStatsBlock()
     }
     
     // MARK: - Header block
@@ -120,6 +107,8 @@ class DetailedStatsViewModel: DetailedStatsViewModelType {
         tableBlockItems.append(spacing)
         let table: DetailedStatsItem = .table(DetailedTableGroupsMainCellVM(callbackService: callBackService, leagueStandings: standings))
         tableBlockItems.append(table)
+        let lastSpacing: DetailedStatsItem = .spacing(30)
+        tableBlockItems.append(lastSpacing)
         items.append(contentsOf: tableBlockItems)
     }
     
@@ -151,9 +140,25 @@ class DetailedStatsViewModel: DetailedStatsViewModelType {
     
     // MARK: - Player stats
     private func startPlayerStatsBlock() {
-//        masterService.requestPlayerStats(season: 0, league: 0, page: 0) { response in
-//            
-//        }
+        guard !playersStats.isEmpty else { return }
+        var statsItems: [DetailedStatsItem] = []
+        let title: DetailedStatsItem = .title(DetailedStatsTitleVM(title: "Player Stats"))
+        let goalTitle: DetailedStatsItem = .playerStatsTitle(DetailedPlayerStatsTitleCellVM(gameTypeCallBack: { statsTypeImage in
+            
+        }, statsType: .goals))
+        let goalContent: DetailedStatsItem = .playerStatsItem(DetailedPlayerStatsMainCellVM(playerStats: playersStats, cellType: .goals))
+        let assistsTitle: DetailedStatsItem = .playerStatsTitle(DetailedPlayerStatsTitleCellVM(gameTypeCallBack: { statsTypeImage in
+            
+        }, statsType: .assists))
+        let assistsContent: DetailedStatsItem = .playerStatsItem(DetailedPlayerStatsMainCellVM(playerStats: playersStats, cellType: .assists))
+        let spacing: DetailedStatsItem = .spacing(30)
+        statsItems.append(title)
+        statsItems.append(goalTitle)
+        statsItems.append(goalContent)
+        statsItems.append(assistsTitle)
+        statsItems.append(assistsContent)
+        statsItems.append(spacing)
+        items.append(contentsOf: statsItems)
     }
     
     // MARK: - Update screen
@@ -165,17 +170,10 @@ class DetailedStatsViewModel: DetailedStatsViewModelType {
     
     // MARK: - Calculate size
     func getSizeForTable(leagueStanding: [LeaguesInfoStanding]) -> CGFloat {
-        let size = (leagueStanding.count + 1) * 44
-        return CGFloat(integerLiteral: size)
+        let size = (Double(leagueStanding.count) + 1) * 44
+        return CGFloat(size)
+//        return CGFloat(integerLiteral: size)
     }
-    
-    private func startPlayeStatsBlock() {
-        guard !playersStats.isEmpty else { return }
-        
-//        let topGoals = playersStats.filter({$0.statistics.first.})
-        
-    }
-    
     
     // MARK: - TableView methods
     
@@ -195,6 +193,8 @@ enum DetailedStatsItem: Hashable {
     case groups(DetailedTableGroupsCVCellVM)
     case table(DetailedTableGroupsMainCellVM)
     case spacing(CGFloat)
+    case playerStatsTitle(DetailedPlayerStatsTitleCellVM)
+    case playerStatsItem(DetailedPlayerStatsMainCellVM)
 }
 
 // MARK: - Reload

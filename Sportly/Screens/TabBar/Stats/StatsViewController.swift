@@ -74,9 +74,10 @@ class StatsViewController: UIViewController {
         setupConstraints()
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.prefetchDataSource = self
+//        tableView.prefetchDataSource = self
         tableView.isScrollEnabled = true
         tableView.separatorStyle = .none
+        tableView.showsVerticalScrollIndicator = false
         registerCells()
     }
     
@@ -117,6 +118,17 @@ extension StatsViewController: UITableViewDelegate {
             viewModel.validateTappedCell(indexPath)
         }
     }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let contentHeight = scrollView.contentSize.height
+        let tableViewHeight = scrollView.frame.height
+        let contentOffsetY = scrollView.contentOffset.y
+        
+        if contentOffsetY > 0 && contentOffsetY >= contentHeight - tableViewHeight {
+            loadData()
+            print("Request for data")
+        }
+    }
 }
 
 //MARK: - UITableViewDataSource
@@ -146,12 +158,5 @@ extension StatsViewController: UITableViewDataSource {
             cell.selectionStyle = .default
             return cell
         }
-    }
-}
-
-extension StatsViewController: UITableViewDataSourcePrefetching {
-    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
-        indexPaths.map { print($0.item) }
-//        viewModel.loadNextData(prefetchRowsAt: indexPaths)
     }
 }

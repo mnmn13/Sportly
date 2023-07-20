@@ -73,6 +73,7 @@ class DetailedTableGroupsTableCell: UITableViewCell {
         setupConstraints()
 //        contentView.backgroundColor = UIColor(projColors: .gray)
         contentView.backgroundColor = .clear
+        selectionStyle = .none
     }
     
     required init?(coder: NSCoder) {

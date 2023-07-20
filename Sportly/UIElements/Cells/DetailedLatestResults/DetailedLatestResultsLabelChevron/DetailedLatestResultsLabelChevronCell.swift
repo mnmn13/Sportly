@@ -30,34 +30,14 @@ class DetailedLatestResultsLabelChevronCell: UITableViewCell {
         return chevron
     }()
     
-    // MARK: - Flags
-    private lazy var flag: Bool = false
-    private lazy var flag2: Bool = false
-    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupConstraints()
+        setupGesture()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    // MARK: - Cell tapped methods
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        if !flag {
-            flag = true
-        } else {
-            if !flag2 {
-                flag2 = true
-            } else {
-                guard let viewModelCopy = viewModel else { return }
-                viewModel?.chevronSideFlag = !viewModelCopy.chevronSideFlag
-                guard let flag = viewModel?.chevronSideFlag else { return }
-                didSelectRow(flag)
-            }
-        }
     }
     
     override func prepareForReuse() {
@@ -88,6 +68,20 @@ class DetailedLatestResultsLabelChevronCell: UITableViewCell {
             make.centerY.equalTo(contentView.snp.centerY)
             make.size.equalTo(20)
         }
+    }
+    
+    // MARK: - Configure gesture
+    private func setupGesture() {
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(chevronTapped))
+        chevronImage.isUserInteractionEnabled = true
+        chevronImage.addGestureRecognizer(gesture)
+    }
+    
+    @objc private func chevronTapped() {
+        guard let viewModelCopy = viewModel else { return }
+        viewModel?.chevronSideFlag = !viewModelCopy.chevronSideFlag
+        guard let flag = viewModel?.chevronSideFlag else { return }
+        didSelectRow(flag)
     }
     
     // MARK: - Configure content

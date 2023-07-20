@@ -59,7 +59,7 @@ class DetailedTableGroupsMainCell: UITableViewCell {
     // MARK: - Configure
     func configure(_ viewModel: DetailedTableGroupsMainCellVM) {
         self.viewModel = viewModel
-        bindForReload()
+//        bindForReload()
         viewModel.configureInitialItems()
     }
     
@@ -89,8 +89,8 @@ extension DetailedTableGroupsMainCell: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         guard let item = viewModel?.getItem(indexPath: indexPath) else { return UITableView.automaticDimension }
         switch item {
-        case .header: return UITableView.automaticDimension
-        case .content: return UITableView.automaticDimension
+        case .header: return 44
+        case .content: return 44
         }
     }
 }
@@ -114,9 +114,14 @@ extension DetailedTableGroupsMainCell: UITableViewDataSource {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: DetailedTableGroupsTableContentCell.identifier, for: indexPath) as? DetailedTableGroupsTableContentCell else { return tableView.dequeueReusableCell(withIdentifier: "empty", for: indexPath) }
             cell.configure(detailedTableGroupsTableContentCellVM)
             cell.backgroundColor = .clear
-            if indexPath != IndexPath(row: 1, section: 0) && indexPath.item == viewModel!.getItemsCount() - 1 {
+//            if indexPath != IndexPath(row: 1, section: 0) && indexPath.item == viewModel!.getItemsCount() - 1 {
+//                cell.hideSeparator()
+//                
+//            }
+            if indexPath.item == viewModel!.getItemsCount() - 1 {
                 cell.hideSeparator()
-                
+            } else {
+                cell.separatorInset = UIEdgeInsets(top: 5, left: 16, bottom: 5, right: 0)
             }
             return cell
         }

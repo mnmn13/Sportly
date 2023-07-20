@@ -32,12 +32,14 @@ class DetailedLatestResultsCell: UITableViewCell {
         pageControl.currentPageIndicatorTintColor = .black
         pageControl.hidesForSinglePage = true
         pageControl.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+        pageControl.isUserInteractionEnabled = false
         return pageControl
     }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupConstraints()
+        selectionStyle = .none
     }
     
     required init?(coder: NSCoder) {

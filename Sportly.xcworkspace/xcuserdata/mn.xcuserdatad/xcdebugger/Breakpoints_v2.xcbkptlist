@@ -7,212 +7,79 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "319E0F0B-04F5-4123-9E4C-C0E27B5E7509"
+            uuid = "E98009BA-6ACD-4237-9086-88BE886E43C1"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Sportly/Screens/TabBar/Stats/DetailedStats/DetailedStatsViewModel.swift"
+            filePath = "Sportly/Screens/TabBar/Stats/DetailedStats/DetailedStatsViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "61"
-            endingLineNumber = "61"
-            landmarkName = "loadData()"
+            startingLineNumber = "205"
+            endingLineNumber = "205"
+            landmarkName = "tableView(_:cellForRowAt:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "045E103A-0861-4986-B3FC-CE4562CC047D"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Sportly/Screens/TabBar/Stats/DetailedStats/DetailedStatsViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "203"
+            endingLineNumber = "203"
+            landmarkName = "tableView(_:cellForRowAt:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "90D883B4-FAAB-4A45-B7F6-18900316DA06"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Sportly/UIElements/Cells/DetailedPlayerStats/DetailedPlayerStatsMain/DetailedPlayerStatsMainCell.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "70"
+            endingLineNumber = "70"
+            landmarkName = "configure(_:)"
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "319E0F0B-04F5-4123-9E4C-C0E27B5E7509 - 85fb82a07d4c2a2f"
+                  uuid = "90D883B4-FAAB-4A45-B7F6-18900316DA06 - 76fa3be1807e8f17"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "(1) suspend resume partial function for Sportly.DetailedStatsViewModel.loadData() async -&gt; ()"
+                  symbolName = "Sportly.DetailedPlayerStatsMainCell.configure(Sportly.DetailedPlayerStatsMainCellVM) -&gt; ()"
                   moduleName = "Sportly"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mn/Documents/ios/Swift,%20new/Sportly/Sportly/Screens/TabBar/Stats/DetailedStats/DetailedStatsViewModel.swift"
+                  urlString = "file:///Users/mn/Documents/ios/Swift,%20new/Sportly/Sportly/UIElements/Cells/DetailedPlayerStats/DetailedPlayerStatsMain/DetailedPlayerStatsMainCell.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "61"
-                  endingLineNumber = "61"
-                  offsetFromSymbolStart = "735">
+                  startingLineNumber = "68"
+                  endingLineNumber = "68"
+                  offsetFromSymbolStart = "62">
                </Location>
                <Location
-                  uuid = "319E0F0B-04F5-4123-9E4C-C0E27B5E7509 - c55ea5749648b726"
+                  uuid = "90D883B4-FAAB-4A45-B7F6-18900316DA06 - 76fa3be1807e80d5"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "(8) suspend resume partial function for Sportly.DetailedStatsViewModel.loadData() async -&gt; ()"
+                  symbolName = "Sportly.DetailedPlayerStatsMainCell.configure(Sportly.DetailedPlayerStatsMainCellVM) -&gt; ()"
                   moduleName = "Sportly"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mn/Documents/ios/Swift,%20new/Sportly/Sportly/Screens/TabBar/Stats/DetailedStats/DetailedStatsViewModel.swift"
+                  urlString = "file:///Users/mn/Documents/ios/Swift,%20new/Sportly/Sportly/UIElements/Cells/DetailedPlayerStats/DetailedPlayerStatsMain/DetailedPlayerStatsMainCell.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "61"
-                  endingLineNumber = "61"
-                  offsetFromSymbolStart = "56">
-               </Location>
-               <Location
-                  uuid = "319E0F0B-04F5-4123-9E4C-C0E27B5E7509 - 79d69ae9e9f0306c"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "implicit closure #3 @Sendable () async -&gt; Swift.Optional&lt;Swift.Array&lt;Sportly.LeaguesFixtureV3Response&gt;&gt; in Sportly.DetailedStatsViewModel.loadData() async -&gt; ()"
-                  moduleName = "Sportly"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mn/Documents/ios/Swift,%20new/Sportly/Sportly/Screens/TabBar/Stats/DetailedStats/DetailedStatsViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "61"
-                  endingLineNumber = "61"
-                  offsetFromSymbolStart = "45">
-               </Location>
-               <Location
-                  uuid = "319E0F0B-04F5-4123-9E4C-C0E27B5E7509 - 775124a1edae5081"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(1) suspend resume partial function for implicit closure #3 @Sendable () async -&gt; Swift.Optional&lt;Swift.Array&lt;Sportly.LeaguesFixtureV3Response&gt;&gt; in Sportly.DetailedStatsViewModel.loadData() async -&gt; ()"
-                  moduleName = "Sportly"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mn/Documents/ios/Swift,%20new/Sportly/Sportly/Screens/TabBar/Stats/DetailedStats/DetailedStatsViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "61"
-                  endingLineNumber = "61"
-                  offsetFromSymbolStart = "50">
-               </Location>
-               <Location
-                  uuid = "319E0F0B-04F5-4123-9E4C-C0E27B5E7509 - 1703b60ce3acca31"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(2) await resume partial function for implicit closure #3 @Sendable () async -&gt; Swift.Optional&lt;Swift.Array&lt;Sportly.LeaguesFixtureV3Response&gt;&gt; in Sportly.DetailedStatsViewModel.loadData() async -&gt; ()"
-                  moduleName = "Sportly"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mn/Documents/ios/Swift,%20new/Sportly/Sportly/Screens/TabBar/Stats/DetailedStats/DetailedStatsViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "61"
-                  endingLineNumber = "61"
-                  offsetFromSymbolStart = "48">
-               </Location>
-               <Location
-                  uuid = "319E0F0B-04F5-4123-9E4C-C0E27B5E7509 - e41604226cc3129f"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(3) suspend resume partial function for implicit closure #3 @Sendable () async -&gt; Swift.Optional&lt;Swift.Array&lt;Sportly.LeaguesFixtureV3Response&gt;&gt; in Sportly.DetailedStatsViewModel.loadData() async -&gt; ()"
-                  moduleName = "Sportly"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mn/Documents/ios/Swift,%20new/Sportly/Sportly/Screens/TabBar/Stats/DetailedStats/DetailedStatsViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "61"
-                  endingLineNumber = "61"
-                  offsetFromSymbolStart = "28">
-               </Location>
-               <Location
-                  uuid = "319E0F0B-04F5-4123-9E4C-C0E27B5E7509 - dd79f5dd2f51bd9c"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(4) suspend resume partial function for implicit closure #3 @Sendable () async -&gt; Swift.Optional&lt;Swift.Array&lt;Sportly.LeaguesFixtureV3Response&gt;&gt; in Sportly.DetailedStatsViewModel.loadData() async -&gt; ()"
-                  moduleName = "Sportly"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mn/Documents/ios/Swift,%20new/Sportly/Sportly/Screens/TabBar/Stats/DetailedStats/DetailedStatsViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "61"
-                  endingLineNumber = "61"
-                  offsetFromSymbolStart = "28">
-               </Location>
-               <Location
-                  uuid = "319E0F0B-04F5-4123-9E4C-C0E27B5E7509 - 85fb82a07d4c2a2f"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(1) suspend resume partial function for Sportly.DetailedStatsViewModel.loadData() async -&gt; ()"
-                  moduleName = "Sportly"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mn/Documents/ios/Swift,%20new/Sportly/Sportly/Screens/TabBar/Stats/DetailedStats/DetailedStatsViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "61"
-                  endingLineNumber = "61"
-                  offsetFromSymbolStart = "489">
-               </Location>
-               <Location
-                  uuid = "319E0F0B-04F5-4123-9E4C-C0E27B5E7509 - 2df1005d44d54a6e"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "implicit closure #2 @Sendable () async -&gt; Swift.Optional&lt;Swift.Array&lt;Sportly.LeaguesFixtureV3Response&gt;&gt; in Sportly.DetailedStatsViewModel.loadData() async -&gt; ()"
-                  moduleName = "Sportly"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mn/Documents/ios/Swift,%20new/Sportly/Sportly/Screens/TabBar/Stats/DetailedStats/DetailedStatsViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "61"
-                  endingLineNumber = "61"
-                  offsetFromSymbolStart = "76">
-               </Location>
-               <Location
-                  uuid = "319E0F0B-04F5-4123-9E4C-C0E27B5E7509 - 775124a1edae5081"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(1) suspend resume partial function for implicit closure #2 @Sendable () async -&gt; Swift.Optional&lt;Swift.Array&lt;Sportly.LeaguesFixtureV3Response&gt;&gt; in Sportly.DetailedStatsViewModel.loadData() async -&gt; ()"
-                  moduleName = "Sportly"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mn/Documents/ios/Swift,%20new/Sportly/Sportly/Screens/TabBar/Stats/DetailedStats/DetailedStatsViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "61"
-                  endingLineNumber = "61"
-                  offsetFromSymbolStart = "59">
-               </Location>
-               <Location
-                  uuid = "319E0F0B-04F5-4123-9E4C-C0E27B5E7509 - 1703b60ce3acca31"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(2) await resume partial function for implicit closure #2 @Sendable () async -&gt; Swift.Optional&lt;Swift.Array&lt;Sportly.LeaguesFixtureV3Response&gt;&gt; in Sportly.DetailedStatsViewModel.loadData() async -&gt; ()"
-                  moduleName = "Sportly"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mn/Documents/ios/Swift,%20new/Sportly/Sportly/Screens/TabBar/Stats/DetailedStats/DetailedStatsViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "61"
-                  endingLineNumber = "61"
-                  offsetFromSymbolStart = "48">
-               </Location>
-               <Location
-                  uuid = "319E0F0B-04F5-4123-9E4C-C0E27B5E7509 - e41604226cc3129f"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(3) suspend resume partial function for implicit closure #2 @Sendable () async -&gt; Swift.Optional&lt;Swift.Array&lt;Sportly.LeaguesFixtureV3Response&gt;&gt; in Sportly.DetailedStatsViewModel.loadData() async -&gt; ()"
-                  moduleName = "Sportly"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mn/Documents/ios/Swift,%20new/Sportly/Sportly/Screens/TabBar/Stats/DetailedStats/DetailedStatsViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "61"
-                  endingLineNumber = "61"
-                  offsetFromSymbolStart = "39">
-               </Location>
-               <Location
-                  uuid = "319E0F0B-04F5-4123-9E4C-C0E27B5E7509 - dd79f5dd2f51bd9c"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(4) suspend resume partial function for implicit closure #2 @Sendable () async -&gt; Swift.Optional&lt;Swift.Array&lt;Sportly.LeaguesFixtureV3Response&gt;&gt; in Sportly.DetailedStatsViewModel.loadData() async -&gt; ()"
-                  moduleName = "Sportly"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mn/Documents/ios/Swift,%20new/Sportly/Sportly/Screens/TabBar/Stats/DetailedStats/DetailedStatsViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "61"
-                  endingLineNumber = "61"
-                  offsetFromSymbolStart = "39">
+                  startingLineNumber = "70"
+                  endingLineNumber = "70"
+                  offsetFromSymbolStart = "62">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -220,16 +87,144 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "DB0AA67D-9AE4-4661-80E0-8A5B4A40ADA8"
+            uuid = "6E1C09CE-51CD-491F-8F10-443258BE8214"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Sportly/Managers/NetworkLayer/NetworkManager.swift"
+            filePath = "Sportly/UIElements/Cells/DetailedPlayerStats/DetailedPlayerStatsMain/DetailedPlayerStatsMainCell.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "105"
-            endingLineNumber = "105"
-            landmarkName = "requestLeagueStandings(season:league:)"
+            startingLineNumber = "123"
+            endingLineNumber = "123"
+            landmarkName = "collectionView(_:numberOfItemsInSection:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "6E1C09CE-51CD-491F-8F10-443258BE8214 - 1bf339ea55872847"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Sportly.DetailedPlayerStatsMainCell.collectionView(_: __C.UICollectionView, numberOfItemsInSection: Swift.Int) -&gt; Swift.Int"
+                  moduleName = "Sportly"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mn/Documents/ios/Swift,%20new/Sportly/Sportly/UIElements/Cells/DetailedPlayerStats/DetailedPlayerStatsMain/DetailedPlayerStatsMainCell.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "121"
+                  endingLineNumber = "121"
+                  offsetFromSymbolStart = "86">
+               </Location>
+               <Location
+                  uuid = "6E1C09CE-51CD-491F-8F10-443258BE8214 - 1bf339ea55872819"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Sportly.DetailedPlayerStatsMainCell.collectionView(_: __C.UICollectionView, numberOfItemsInSection: Swift.Int) -&gt; Swift.Int"
+                  moduleName = "Sportly"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mn/Documents/ios/Swift,%20new/Sportly/Sportly/UIElements/Cells/DetailedPlayerStats/DetailedPlayerStatsMain/DetailedPlayerStatsMainCell.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "123"
+                  endingLineNumber = "123"
+                  offsetFromSymbolStart = "86">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "DCC3411C-38CD-44DC-BFD0-AE4AB8252FC2"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Sportly/UIElements/Cells/DetailedPlayerStats/DetailedPlayerStatsMain/DetailedPlayerStatsMainCell.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "60"
+            endingLineNumber = "60"
+            landmarkName = "createLayout()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "DCC3411C-38CD-44DC-BFD0-AE4AB8252FC2 - 39d8acfaee66111f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Sportly.DetailedPlayerStatsMainCell.createLayout() -&gt; __C.UICollectionViewCompositionalLayout"
+                  moduleName = "Sportly"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mn/Documents/ios/Swift,%20new/Sportly/Sportly/UIElements/Cells/DetailedPlayerStats/DetailedPlayerStatsMain/DetailedPlayerStatsMainCell.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "58"
+                  endingLineNumber = "58"
+                  offsetFromSymbolStart = "913">
+               </Location>
+               <Location
+                  uuid = "DCC3411C-38CD-44DC-BFD0-AE4AB8252FC2 - 39d8acfaee661141"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Sportly.DetailedPlayerStatsMainCell.createLayout() -&gt; __C.UICollectionViewCompositionalLayout"
+                  moduleName = "Sportly"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mn/Documents/ios/Swift,%20new/Sportly/Sportly/UIElements/Cells/DetailedPlayerStats/DetailedPlayerStatsMain/DetailedPlayerStatsMainCell.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "60"
+                  endingLineNumber = "60"
+                  offsetFromSymbolStart = "843">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "86F949E5-CF24-4097-BC23-6ACDF670FDB3"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Sportly/UIElements/Cells/DetailedPlayerStats/DetailedPlayerStatsMain/DetailedPlayerStatsMainCell.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "23"
+            endingLineNumber = "23"
+            landmarkName = "collectionView"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A065B399-17C6-4EED-8056-3A0856329644"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Sportly/UIElements/Cells/DetailedPlayerStats/DetailedPlayerStatsMain/DetailedPlayerStatsMainCellVM.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "83"
+            endingLineNumber = "83"
+            landmarkName = "updateScreen()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "CE35FDD5-C643-41DF-A7C2-3978B776A2F5"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Sportly/Screens/TabBar/Stats/DetailedStats/DetailedStatsViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "173"
+            endingLineNumber = "173"
+            landmarkName = "getSizeForTable(leagueStanding:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

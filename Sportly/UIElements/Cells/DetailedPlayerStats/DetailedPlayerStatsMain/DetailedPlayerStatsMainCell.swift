@@ -40,21 +40,23 @@ class DetailedPlayerStatsMainCell: UITableViewCell {
     // MARK: - Register cells
     private func registerCells(_ collectionView: UICollectionView) {
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "empty")
-        collectionView.register(DetailedTableGroupsTitleCell.self, forCellWithReuseIdentifier: DetailedTableGroupsTitleCell.identifier)
+        collectionView.register(DetailedPlayerStatsCVCell.self, forCellWithReuseIdentifier: DetailedPlayerStatsCVCell.identifier)
     }
     
     // MARK: - UICollectionViewCompositionalLayout
     private func createLayout() -> UICollectionViewCompositionalLayout {
-        let itemSize = NSCollectionLayoutSize(widthDimension: .estimated(150), heightDimension: .absolute(30))
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalHeight(1), heightDimension: .fractionalHeight(1))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-//        item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 30, bottom: 0, trailing: 0)
-        let interItemSpacing: CGFloat = 15
-        let groupSize = NSCollectionLayoutSize(widthDimension: .estimated(500), heightDimension: .fractionalHeight(1))
+        
+        let interItemSpacing: CGFloat = 20
+        let groupSize = NSCollectionLayoutSize(widthDimension: .absolute(180), heightDimension: .absolute(180))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
-        group.interItemSpacing = .flexible(interItemSpacing)
+//        group.interItemSpacing = .fixed(interItemSpacing)
+//        group.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 0)
         let section = NSCollectionLayoutSection(group: group)
         section.orthogonalScrollingBehavior = .continuous
-        section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 0, bottom: 0, trailing: 40)
+        section.interGroupSpacing = interItemSpacing
+        section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 40)
         return UICollectionViewCompositionalLayout(section: section)
     }
     
@@ -66,12 +68,44 @@ class DetailedPlayerStatsMainCell: UITableViewCell {
     // MARK: - Configure
     func configure(_ viewModel: DetailedPlayerStatsMainCellVM) {
         self.viewModel = viewModel
+        bindForReload()
+        self.viewModel?.convetData()
         setupContent()
+    }
+    
+    private func bindForReload() {
+        viewModel?.onReload = { [weak self] changes in
+            guard let self = self else { return }
+            if changes != .none {
+                self.collectionView.performBatchUpdates {
+                    self.collectionView.insertSections(changes.insertedSection)
+                    self.collectionView.deleteSections(changes.removedSection)
+                    self.collectionView.insertItems(at: changes.inserted)
+                    self.collectionView.deleteItems(at: changes.removed)
+                    self.collectionView.reloadItems(at: changes.updated)
+                }
+            }
+//            self.collectionView.reloadData()
+        }
     }
     
     // MARK: - Constraints
     private func setupConstraints() {
-        
+        contentView.addSubview(collectionView)
+        collectionView.snp.makeConstraints { make in
+            make.top.equalTo(contentView.snp.top)
+            make.bottom.equalTo(contentView.snp.bottom)
+            make.leading.equalTo(contentView.snp.leading)
+            make.trailing.equalTo(contentView.snp.trailing)
+//            make.height.equalTo(200)
+        }
+//        collectionView.snp.makeConstraints { make in
+//            make.top.equalToSuperview()
+//            make.bottom.equalToSuperview()
+//            make.leading.equalToSuperview()
+//            make.trailing.equalToSuperview()
+//
+//        }
     }
     
     // MARK: - Content
@@ -86,10 +120,16 @@ extension DetailedPlayerStatsMainCell: UICollectionViewDelegate {}
 // MARK: - UICollectionViewDataSource
 extension DetailedPlayerStatsMainCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        0
+        viewModel?.numberOfItems() ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        .init()
+        guard let item = viewModel?.getItem(indexPath: indexPath) else { return collectionView.dequeueReusableCell(withReuseIdentifier: "empty", for: indexPath) }
+        switch item {
+        case .playerCard(let detailedPlayerStatsCVCellVM):
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DetailedPlayerStatsCVCell.identifier, for: indexPath) as? DetailedPlayerStatsCVCell else { return collectionView.dequeueReusableCell(withReuseIdentifier: "empty", for: indexPath) }
+            cell.configure(detailedPlayerStatsCVCellVM)
+            return cell
+        }
     }
 }
